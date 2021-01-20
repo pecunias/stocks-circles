@@ -1,14 +1,17 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+
 @Component({
   selector: 'app-circle',
   templateUrl: './circle.component.html',
   styleUrls: ['./circle.component.css']
 })
 export class CircleComponent implements OnInit, AfterContentInit {
+  @Input() holdings: any; // decorate the property with @Input()
+  
   elementDimensions = {
-    width: 1000,
-    height: 1000
+    width: window.innerWidth,
+    height: window.innerHeight
   };
 
   constructor() { }
@@ -16,8 +19,15 @@ export class CircleComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
-    const circles = [{radius: 50}, {radius: 10}, {radius: 10}, {radius: 5}, {radius: 2}, {radius: 15}];
-    this.drawCircles(circles);
+    this.drawCircles(this.generateData(this.holdings));
+  }
+
+  generateData(holdings: any): any {
+    const result = [];
+    holdings.forEach(() => {
+      result.push({radius: 50});
+    });
+    return result;
   }
 
   drawCircles(circles) {
