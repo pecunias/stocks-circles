@@ -13,7 +13,14 @@ export class AppComponent {
   portfolio = [];
 
   ngAfterContentInit() {
-    this.portfolioService.getPortfolio().then(data => this.portfolio = data);
-    this.intradayService.getIntraday();
+    this.getPortfolio();
+  }
+
+  getPortfolio() {
+    this.portfolioService.getPortfolio().then(async data => {
+      const stockData = await this.intradayService.getIntraday();
+      console.log(stockData);
+      this.portfolio = data
+    });
   }
 }
