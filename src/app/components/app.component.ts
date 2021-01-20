@@ -1,5 +1,4 @@
-import { AfterContentInit, Component } from '@angular/core';
-import * as d3 from 'd3';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
