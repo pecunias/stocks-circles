@@ -13,7 +13,7 @@ export class AppComponent {
   portfolio = [];
 
   ngAfterContentInit() {
-    this.portfolio = this.portfolioService.getPortfolio();
-    this.intradayService.getIntraday([]);
+    this.portfolioService.getPortfolio().then(data => this.portfolio = data);
+    this.intradayService.getIntraday();
   }
 }

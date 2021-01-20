@@ -1,5 +1,6 @@
 import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import { Holding } from '../../models/holdings/holding'
 
 @Component({
   selector: 'app-circle',
@@ -22,10 +23,17 @@ export class CircleComponent implements OnInit, AfterContentInit {
     this.drawCircles(this.generateData(this.holdings));
   }
 
-  generateData(holdings: any): any {
+  getTotalSum(total, num: Holding) {
+    console.log(num);
+    return total + (num.amount * num.last);
+  }
+  
+  generateData(holdings: [Holding]): any {
     const result = [];
-    holdings.forEach(() => {
-      result.push({radius: 50});
+    let totalBalanceHoldings = holdings.reduce(this.getTotalSum, 0)
+    console.log(totalBalanceHoldings);
+    holdings.forEach((holding) => {
+      result.push({radius: 2});
     });
     return result;
   }

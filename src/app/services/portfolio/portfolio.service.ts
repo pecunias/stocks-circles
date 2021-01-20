@@ -8,7 +8,8 @@ export class PortfolioService {
   constructor() { }
 
   getPortfolio() {
-    return [
+    return new Promise<any>((resolve) => { 
+      resolve(    [
       {
         symbol: 'APHA',
         amount: 1033
@@ -37,6 +38,7 @@ export class PortfolioService {
         symbol: 'CRLBF',
         amount: 315
     },
-    ]
+    ])
+  });
   }
 }
